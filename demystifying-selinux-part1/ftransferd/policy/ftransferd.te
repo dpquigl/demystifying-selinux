@@ -1,0 +1,59 @@
+policy_module(ftransferd,1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+type ftransferd_t;
+type ftransferd_exec_t;
+init_daemon_domain(ftransferd_t, ftransferd_exec_t)
+
+type ftransferd_content_t;
+files_type(ftransferd_content_t)
+userdom_user_home_content(ftransferd_content_t);
+#permissive ftransferd_t;
+
+type ftransferd_initrc_exec_t;
+init_script_file(ftransferd_initrc_exec_t)
+
+########################################
+#
+# ftransferd local policy
+#
+
+
+# Init script handling
+domain_use_interactive_fds(ftransferd_t)
+
+# We would only need this if ftransferd had a config file in etc
+#files_read_etc_files(ftransferd_t)
+
+# Needed because libc has localization support
+miscfiles_read_localization(ftransferd_t)
+
+# Probably not needed.
+sysnet_dns_name_resolve(ftransferd_t)
+corenet_all_recvfrom_unlabeled(ftransferd_t)
+
+allow ftransferd_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_all_if(ftransferd_t)
+corenet_tcp_sendrecv_all_nodes(ftransferd_t)
+corenet_tcp_sendrecv_all_ports(ftransferd_t)
+corenet_tcp_bind_all_nodes(ftransferd_t)
+corenet_tcp_bind_all_unreserved_ports(ftransferd_t)
+files_search_home(ftransferd_t)
+userdom_list_user_home_dirs(ftransferd_t)
+
+logging_send_syslog_msg(ftransferd_t)
+
+# Allow daemon the capability to access files it doesn't own.
+allow ftransferd_t self:capability { dac_read_search dac_override };
+
+# Allow ftransferd the ability to search home directories so it can get to the public_ftransferd folder
+files_search_home(ftransferd_t)
+userdom_list_user_home_dirs(ftransferd_t)
+
+# Allow the deamon to read ftransferd content files and directories
+list_dirs_pattern(ftransferd_t, ftransferd_content_t, ftransferd_content_t)
+read_files_pattern(ftransferd_t, ftransferd_content_t, ftransferd_content_t)

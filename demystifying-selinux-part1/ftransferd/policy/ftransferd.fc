@@ -1,0 +1,4 @@
+
+/usr/local/bin/ftransferd	--	gen_context(system_u:object_r:ftransferd_exec_t,s0)
+
+/etc/rc\.d/init\.d/ftransferd	--	gen_context(system_u:object_r:ftransferd_initrc_exec_t,s0)
