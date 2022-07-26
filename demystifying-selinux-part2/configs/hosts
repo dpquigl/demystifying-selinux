@@ -1,0 +1,6 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+127.0.0.1 www.example-labels.com
+127.0.0.1 www.example-opt.com
+127.0.0.1 www.example-userhome.com
+127.0.0.1 www.example-port.com

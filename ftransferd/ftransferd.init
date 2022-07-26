@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+### BEGIN INIT INFO
+# Provides: ftransferd
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Path to the server binary.
+ftransferd=/usr/local/bin/ftransferd
+prog=ftransferd
+port=20000
+RETVAL=0
+
+start() {
+        echo -n $"Starting $prog: "
+        $ftransferd $port
+        RETVAL=$?
+        return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	killall $prog
+	RETVAL=$?
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	stop
+	start
+	;;
+  *)
+	echo $"Usage: $prog {start|stop|restart}"
+	RETVAL=3
+esac
+
+exit $RETVAL
