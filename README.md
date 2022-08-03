@@ -5,3 +5,4 @@ This is a collection of various SELinux talks and workshops I've given over the 
 Talks:
 * demystifying-selinux-part1: 30-minute intro to SELinux and basic issue debugging
 * demystifying-selinux-part2: 4 hour workshop introducing SELinux administration and policy development.
+* selinux-introduction: 1 hour intro to SELinux containing additional information about access control and SELinux fundamentals. Contains additional slides for the usecases as well.

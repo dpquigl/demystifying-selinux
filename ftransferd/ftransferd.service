@@ -1,0 +1,13 @@
+[Unit]
+Description=Sample Insecure File Transfer Daemon
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/ftransferd 20000
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
