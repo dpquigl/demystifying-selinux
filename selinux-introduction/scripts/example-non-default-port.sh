@@ -19,7 +19,7 @@ netstat -alpZ | grep httpd
 sed -i 's/80/10321/g' /etc/httpd/conf/httpd.conf
 
 # Try to restart the service
-service httpd restart
+systemctl restart httpd
 
 # Failure Lets see how ports are labeled
 semanage port -l | less
@@ -31,7 +31,7 @@ semanage port -a -t http_port_t -p tcp 10321
 semanage port -l | grep 10321
 
 # Restart the service
-service httpd restart
+systemctl restart httpd
 
 # Check out httpd running on our new port
 netstat -alpZ | grep httpd
@@ -43,7 +43,7 @@ sed -i 's/10321/80/g' /etc/httpd/conf/httpd.conf
 semanage port -d -p tcp 10321
 
 # Restart the service
-service httpd restart
+systemctl restart httpd
 
 # Show httpd back to normal
 netstat -alpZ | grep httpd
