@@ -1,0 +1,1 @@
+alias exftransfer='./example-ftransfer.sh 2>&1 | grep -Ev "^read$"'
